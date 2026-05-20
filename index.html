@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="hotel-rms-collection" content="real">
+
 <title>Comparador de Tarifas · Chez Pitu Praia Hotel</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -48,6 +50,77 @@ body{background:linear-gradient(180deg,#0f172a 0%,#132238 35%,#162b45 65%,#1a345
 .brand-sub{font-size:11px;color:var(--txt-sub);margin-top:1px}
 .header-meta{text-align:right;font-size:11px;color:var(--txt-muted)}
 .header-meta strong{color:var(--blue-lite);font-size:13px}
+.search-panel{background:linear-gradient(135deg,#0d2137 0%,#132f4c 55%,#1a3a5c 100%);border-bottom:1px solid var(--border);padding:16px 24px;color:#e8f1f8}
+.search-panel h2{font-size:15px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.search-panel .search-hint{font-size:11px;color:#9eb8d4;margin-bottom:12px;line-height:1.45}
+.search-periods{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:14px}
+.search-period-row{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px}
+.search-period-row label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#8ab4d9;display:block;margin-bottom:4px}
+.search-period-row .sp-title{font-size:12px;font-weight:600;color:#fff;margin-bottom:8px}
+.search-period-row input[type=text],.search-period-row input[type=date]{width:100%;padding:6px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;font-size:12px}
+.search-period-row input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1)}
+.search-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn-search-direct{background:linear-gradient(135deg,#0d5c63,#148a94);color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(13,92,99,.45)}
+.btn-search-booking{background:linear-gradient(135deg,#3d2a7a,#5b4bb4);color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(61,42,122,.45)}
+.btn-search-save{background:rgba(255,255,255,.12);color:#e8f1f8;border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:10px;font-size:12px;cursor:pointer}
+.btn-search-direct:hover,.btn-search-booking:hover{filter:brightness(1.08)}
+.btn-search-direct:disabled,.btn-search-booking:disabled{opacity:.45;cursor:not-allowed}
+.search-status{font-size:11px;color:#7dd3fc;margin-left:8px;min-height:18px}
+.search-online-warn{background:rgba(255,193,7,.15);border:1px solid rgba(255,193,7,.4);color:#ffe08a;padding:8px 12px;border-radius:8px;font-size:11px;margin-bottom:10px;display:none}
+.ops-status-panel{background:linear-gradient(180deg,rgba(8,22,42,.97) 0%,rgba(12,32,58,.92) 100%);border-bottom:1px solid rgba(67,97,238,.35);padding:14px 24px 18px;box-shadow:0 4px 24px rgba(37,99,235,.12);display:none}
+.ops-status-panel.is-open{display:block}
+.ops-status-panel.is-open{border:1px solid rgba(96,165,250,.35);box-shadow:0 0 28px rgba(59,130,246,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+.ops-status-hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.ops-status-hdr h2{font-size:14px;font-weight:700;margin:0;color:#e8f4ff;display:flex;align-items:center;gap:8px}
+.ops-status-hdr h2 i{color:#60a5fa}
+.ops-channel-badges{display:flex;gap:8px;flex-wrap:wrap}
+.ops-ch-badge{font-size:10px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15);font-family:Consolas,'Courier New',monospace}
+.ops-ch-badge.st-waiting{background:rgba(148,163,184,.15);color:#94a3b8}
+.ops-ch-badge.st-running{background:rgba(59,130,246,.25);color:#7dd3fc;box-shadow:0 0 12px rgba(59,130,246,.35);animation:opsPulse 1.2s ease-in-out infinite}
+.ops-status-panel:not(.is-running) .ops-ch-badge.st-running{animation:none}
+.ops-progress-fill.is-idle{width:0%!important;animation:none}
+.ops-progress-fill.is-pending{width:0%!important;animation:none;background:linear-gradient(90deg,#475569,#64748b)}
+.ops-status-panel.is-pending .ops-status-hdr h2{color:#fde047}
+.ops-log-line.l-archive{opacity:.55;font-style:italic}
+.ops-hotel-card.st-waiting .oh-st{color:#94a3b8}
+.ops-ch-badge.st-done{background:rgba(34,197,94,.2);color:#86efac}
+.ops-ch-badge.st-error{background:rgba(239,68,68,.2);color:#fca5a5}
+@keyframes opsPulse{0%,100%{opacity:1}50%{opacity:.65}}
+.ops-progress-wrap{margin-bottom:12px}
+.ops-progress-meta{display:flex;justify-content:space-between;font-size:11px;color:#9eb8d4;margin-bottom:6px;font-family:Consolas,monospace}
+.ops-progress-track{height:10px;background:rgba(0,0,0,.35);border-radius:8px;overflow:hidden;border:1px solid rgba(96,165,250,.25)}
+.ops-progress-fill{height:100%;width:0%;border-radius:8px;background:linear-gradient(90deg,#2563eb,#38bdf8,#22d3ee);transition:width .45s ease;box-shadow:0 0 14px rgba(56,189,248,.5)}
+.ops-progress-fill.is-done{background:linear-gradient(90deg,#15803d,#22c55e,#4ade80);box-shadow:0 0 14px rgba(34,197,94,.45)}
+.ops-progress-fill.is-error{background:linear-gradient(90deg,#b91c1c,#ef4444)}
+.ops-steps{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:12px;font-size:11px;font-family:Consolas,monospace}
+.ops-step{display:flex;align-items:center;gap:5px;color:#94a3b8}
+.ops-step .ops-ico{width:14px;text-align:center}
+.ops-step.st-running{color:#7dd3fc}
+.ops-step.st-done{color:#86efac}
+.ops-step.st-error{color:#fca5a5}
+.ops-step.st-waiting{color:#64748b}
+.ops-hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px}
+.ops-hotel-card{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 10px;font-size:10px}
+.ops-hotel-card .oh-name{font-weight:700;color:#e2e8f0;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ops-hotel-card .oh-st{font-family:Consolas,monospace;text-transform:uppercase;letter-spacing:.04em}
+.ops-hotel-card.st-waiting .oh-st{color:#94a3b8}
+.ops-hotel-card.st-collecting .oh-st{color:#7dd3fc}
+.ops-hotel-card.st-collecting{border-color:rgba(59,130,246,.5);box-shadow:0 0 10px rgba(59,130,246,.2)}
+.ops-hotel-card.st-done .oh-st{color:#86efac}
+.ops-hotel-card.st-error .oh-st{color:#fca5a5}
+.ops-hotel-card.st-no_rate .oh-st{color:#fde047}
+.ops-terminal{background:rgba(0,8,20,.75);border:1px solid rgba(59,130,246,.3);border-radius:10px;padding:10px 12px;max-height:200px;overflow-y:auto;font-family:Consolas,'Courier New',monospace;font-size:11px;line-height:1.55;box-shadow:inset 0 2px 12px rgba(0,0,0,.4)}
+.ops-terminal::-webkit-scrollbar{width:12px}
+.ops-terminal::-webkit-scrollbar-track{background:rgba(15,30,55,.8);border-radius:6px}
+.ops-terminal::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#60a5fa,#3b82f6);border-radius:6px;border:2px solid rgba(15,30,55,.8)}
+.ops-log-line{color:#cbd5e1;margin:2px 0}
+.ops-log-line.l-ok{color:#86efac}
+.ops-log-line.l-warn{color:#fde047}
+.ops-log-line.l-err{color:#fca5a5}
+.ops-summary{display:flex;flex-wrap:wrap;gap:12px 20px;margin-top:10px;font-size:11px;color:#9eb8d4}
+.ops-summary strong{color:#e2e8f0}
+.ops-retry{margin-top:8px}
+.ops-retry button{background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:#fecaca;padding:6px 14px;border-radius:8px;font-size:11px;cursor:pointer}
 .filter-bar{background:var(--bg-panel);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:sticky;top:68px;z-index:99;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .filter-label{font-size:10px;font-weight:700;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.6px;white-space:nowrap}
 .fsel{background:var(--bg-card);border:1px solid var(--border);color:var(--txt-primary);border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;cursor:pointer;min-width:160px}
@@ -150,6 +223,7 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
 .dash-footer{text-align:center;padding:20px;font-size:10px;color:var(--txt-muted);border-top:1px solid var(--border)}
 /* Sem tarifa */
 .badge-sem-tarifa{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.45);font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;text-transform:uppercase}
+.badge-stale-tarifa{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.4);font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;display:block;margin-top:4px}
 .tbl tbody tr.is-no-rate td{background:rgba(239,68,68,.05)!important}
 .tbl tbody tr.is-no-rate td:first-child{box-shadow:inset 3px 0 0 var(--red)}
 .tbl tbody tr.is-no-rate:hover td{background:rgba(239,68,68,.12)!important}
@@ -313,13 +387,69 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
     </div>
   </div>
   <div class="header-meta">
-    <div>Gerado em <strong>19/05/2026 22:12</strong></div>
+    <div>Gerado em <strong>20/05/2026 12:35</strong></div>
     <div style="margin-top:3px">
-      <strong id="visible-count">40</strong> registros ·
-      <span id="pending-count" style="color:var(--blue-lite)">5 pendentes</span>
+      <strong id="visible-count">30</strong> registros ·
+      <span id="pending-count" style="color:var(--blue-lite)">6 pendentes</span>
     </div>
   </div>
 </header>
+
+<!-- BUSCA MANUAL POR PERÍODO -->
+<section class="search-panel" id="search-panel" aria-label="Configurar busca manual">
+  <h2><i class="bi bi-calendar2-range"></i> Tarefas de Busca de Tarifas</h2>
+  <p class="search-hint">
+    Defina os períodos desejados e execute a busca pelo canal escolhido.
+    Em ambiente online (Netlify), a coleta deve ser feita no computador local do hotel
+    — use os arquivos <code style="color:#b8e0ff">buscar_site_direto.bat</code> ou
+    <code style="color:#b8e0ff">buscar_booking.bat</code>, ou inicie
+    <code style="color:#b8e0ff">python local_server.py</code> para acionar pelo navegador.
+  </p>
+  <div class="search-online-warn" id="search-online-warn">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    Busca disponível apenas no ambiente local do hotel. Salve os períodos e execute os BATs na pasta do projeto.
+  </div>
+  <div class="search-periods" id="search-periods"></div>
+  <div class="search-actions">
+    <button type="button" class="btn-search-direct" id="btn-search-direct" onclick="runChannelSearch('direct')">
+      <i class="bi bi-globe2"></i> Buscar Site Direto
+    </button>
+    <button type="button" class="btn-search-booking" id="btn-search-booking" onclick="runChannelSearch('booking')">
+      <i class="bi bi-building"></i> Buscar Booking.com
+    </button>
+    <button type="button" class="btn-search-save" id="btn-search-save" onclick="saveSearchPeriods()">
+      <i class="bi bi-save"></i> Salvar períodos
+    </button>
+    <span class="search-status" id="search-status"></span>
+  </div>
+</section>
+
+<!-- STATUS DA BUSCA -->
+<section class="ops-status-panel" id="ops-status-panel" aria-label="Status da busca">
+  <div class="ops-status-hdr">
+    <h2><i class="bi bi-terminal"></i> Status da Busca</h2>
+    <div class="ops-channel-badges" id="ops-channel-badges">
+      <span class="ops-ch-badge st-waiting" id="ops-badge-booking" data-ch="booking">Booking.com · Aguardando</span>
+      <span class="ops-ch-badge st-waiting" id="ops-badge-direct" data-ch="direct">Site Direto · Aguardando</span>
+    </div>
+  </div>
+  <div class="ops-progress-wrap">
+    <div class="ops-progress-meta">
+      <span id="ops-current-step">Aguardando início...</span>
+      <span id="ops-progress-pct">0%</span>
+    </div>
+    <div class="ops-progress-track">
+      <div class="ops-progress-fill" id="ops-progress-fill"></div>
+    </div>
+  </div>
+  <div class="ops-steps" id="ops-steps"></div>
+  <div class="ops-hotel-grid" id="ops-hotel-grid"></div>
+  <div class="ops-terminal" id="ops-terminal" role="log" aria-live="polite"></div>
+  <div class="ops-summary" id="ops-summary"></div>
+  <div class="ops-retry" id="ops-retry" style="display:none">
+    <button type="button" onclick="retryLastSearch()"><i class="bi bi-arrow-repeat"></i> Tentar novamente</button>
+  </div>
+</section>
 
 <!-- FILTER BAR -->
 <div class="filter-bar">
@@ -330,7 +460,7 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
   </select>
   <select class="fsel" id="f-period" onchange="applyFilters()">
     <option value="">Todos os Períodos</option>
-    <option value="semana">Semana</option><option value="fds">Final de Semana</option><option value="ferias">Férias Escolares</option><option value="alta_temporada">Alta Temporada</option>
+    <option value="semana_1">Semana</option><option value="final_de_semana">Final de Semana</option><option value="alta_temporada_3">Alta Temporada</option>
   </select>
   <select class="fsel" id="f-channel" onchange="applyFilters()">
     <option value="">Todos os Canais</option>
@@ -338,7 +468,7 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
   </select>
   <select class="fsel" id="f-category" onchange="applyFilters()" style="min-width:150px">
     <option value="">Todas Categorias</option>
-    <option value="Standard">Standard</option><option value="Luxo">Luxo</option><option value="Outros">Outros</option>
+    <option value="Standard">Standard</option><option value="Outros">Outros</option>
   </select>
   <select class="fsel" id="f-status" onchange="applyFilters()" style="min-width:140px">
     <option value="">Todos os Status</option>
@@ -376,18 +506,18 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
 
   <!-- ── Diagnóstico ── -->
   <div class="diag-box">
-    <h6><i class="bi bi-activity"></i> &nbsp;Diagnóstico da Coleta — 19/05/2026 22:12</h6>
+    <h6><i class="bi bi-activity"></i> &nbsp;Diagnóstico da Coleta — 20/05/2026 12:35</h6>
     <div class="diag-grid">
       <div class="diag-item">
-        <span class="diag-val" id="diag-total">40</span>
+        <span class="diag-val" id="diag-total">30</span>
         <span class="diag-lbl">Total de registros</span>
       </div>
       <div class="diag-item">
-        <span class="diag-val diag-ok" id="diag-ok">35</span>
+        <span class="diag-val diag-ok" id="diag-ok">24</span>
         <span class="diag-lbl">Coletados OK</span>
       </div>
       <div class="diag-item">
-        <span class="diag-val diag-warn" id="diag-manual">5</span>
+        <span class="diag-val diag-warn" id="diag-manual">6</span>
         <span class="diag-lbl">Manuais pendentes</span>
       </div>
       <div class="diag-item">
@@ -486,13 +616,13 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
     <div class="kpi-card" style="--kpi-accent:#4361EE">
       <i class="bi bi-collection-fill kpi-icon-bg"></i>
       <div class="kpi-label">Total de Registros</div>
-      <div class="kpi-value" id="k-total">40</div>
+      <div class="kpi-value" id="k-total">30</div>
       <div class="kpi-sub" id="k-total-sub">tarifas no período</div>
     </div>
     <div class="kpi-card" style="--kpi-accent:#ef4444">
       <i class="bi bi-exclamation-triangle-fill kpi-icon-bg"></i>
       <div class="kpi-label">Alertas Críticos</div>
-      <div class="kpi-value" id="k-alerts-critical">11</div>
+      <div class="kpi-value" id="k-alerts-critical">9</div>
       <div class="kpi-sub" id="k-alerts-sub">concorrente barato + acima média</div>
     </div>
     <div class="kpi-card" style="--kpi-accent:#a78bfa">
@@ -646,7 +776,7 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
 </div>
 
 <div class="dash-footer">
-  Comparador de Tarifas · Chez Pitu Praia Hotel · Búzios / RJ · 19/05/2026 22:12
+  Comparador de Tarifas · Chez Pitu Praia Hotel · Búzios / RJ · 20/05/2026 12:35
 </div>
 
 <!-- MODAL EDIÇÃO MANUAL -->
@@ -707,9 +837,9 @@ body,.content,.chart-card,.table-card,.tbl-analise-scroll,[style*="overflow-x"],
 <!-- ════════════════════════════════════════════════════════
      DADOS INJETADOS — | safe evita o autoescape do Jinja2
      ════════════════════════════════════════════════════════ -->
-<script id="data-raw" type="application/json">[{"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 739.2, "max_rate": 1155.0, "total_min": 1478.4, "total_max": 2310.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:03:54.713263", "notes": "[silbeck] via JSON-LD schema.org", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 4, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 964.71, "ai_suggestion": 945.41, "ai_suggestion_delta": 206.21, "ai_suggestion_note": "Média concorrentes: R$ 964.71 · Peso período: ×0.98 · Ajuste sugerido: +R$ 206.21"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 705.5, "max_rate": 1292.0, "total_min": 1411.0, "total_max": 2584.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:04:11.809682", "notes": "[omnibees] via zc-date-price JS", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 672.75, "ai_suggestion": 659.29, "ai_suggestion_note": "Média concorrentes: R$ 672.75 · Peso período: ×0.98"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Standard\n\n1 Cama Casal\nVer comodidades e detalhes", "min_rate": 442.0, "max_rate": 2077.0, "total_min": 884.0, "total_max": 4154.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:04:24.056799", "notes": "[guestreservations]", "room_category": "Standard", "diff_vs_ref_abs": -297.2, "diff_vs_ref_pct": -40.2, "rank_position": 1, "rank_total": 5, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -40.2% mais barato que Chez Pitu", "market_avg": 964.71, "ai_suggestion": 945.41, "ai_suggestion_note": "Média concorrentes: R$ 964.71 · Peso período: ×0.98"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 640.0, "max_rate": 2240.0, "total_min": 1280.0, "total_max": 4480.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:04:41.978728", "notes": "[omnibees] via [class*='price']", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 672.75, "ai_suggestion": 659.29, "ai_suggestion_note": "Média concorrentes: R$ 672.75 · Peso período: ×0.98"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 1487.41, "max_rate": 1487.41, "total_min": 2974.82, "total_max": 2974.82, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:04:54.841401", "notes": "[hsystem]", "room_category": "Standard", "diff_vs_ref_abs": 748.21, "diff_vs_ref_pct": 101.2, "rank_position": 5, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 964.71, "ai_suggestion": 945.41, "ai_suggestion_note": "Média concorrentes: R$ 964.71 · Peso período: ×0.98"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 852.0, "max_rate": 1292.0, "total_min": 1704.0, "total_max": 2584.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:05:04.552016", "notes": "[silbeck] via JSON-LD schema.org", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 4, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 1824.91, "ai_suggestion": 2043.9, "ai_suggestion_delta": 1191.9, "ai_suggestion_note": "Média concorrentes: R$ 1,824.91 · Peso período: ×1.12 · Ajuste sugerido: +R$ 1,191.90"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 830.0, "max_rate": 3814.0, "total_min": 1660.0, "total_max": 7628.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:05:20.597304", "notes": "[omnibees] via [class*='price']", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 735.0, "ai_suggestion": 823.2, "ai_suggestion_note": "Média concorrentes: R$ 735.00 · Peso período: ×1.12"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Superior\n\nVer comodidades e detalhes", "min_rate": 591.0, "max_rate": 2655.0, "total_min": 1182.0, "total_max": 5310.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:05:31.896861", "notes": "[guestreservations]", "room_category": "Luxo", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 1, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 591.0, "ai_suggestion": 661.92, "ai_suggestion_note": "Média concorrentes: R$ 591.00 · Peso período: ×1.12"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 640.0, "max_rate": 896.0, "total_min": 1280.0, "total_max": 1792.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:05:47.313174", "notes": "[omnibees] via zc-date-price JS", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 735.0, "ai_suggestion": 823.2, "ai_suggestion_note": "Média concorrentes: R$ 735.00 · Peso período: ×1.12"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 1824.91, "max_rate": 1824.91, "total_min": 3649.82, "total_max": 3649.82, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:05:59.583484", "notes": "[hsystem]", "room_category": "Standard", "diff_vs_ref_abs": 972.91, "diff_vs_ref_pct": 114.2, "rank_position": 5, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 1824.91, "ai_suggestion": 2043.9, "ai_suggestion_note": "Média concorrentes: R$ 1,824.91 · Peso período: ×1.12"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 734.53, "max_rate": 1164.67, "total_min": 2203.6, "total_max": 3494.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:06:09.324783", "notes": "[silbeck] via JSON-LD schema.org", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 1605.69, "ai_suggestion": 1846.55, "ai_suggestion_delta": 1112.02, "ai_suggestion_note": "Média concorrentes: R$ 1,605.69 · Peso período: ×1.15 · Ajuste sugerido: +R$ 1,112.02"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 821.1, "max_rate": 5880.3, "total_min": 2463.3, "total_max": 17640.9, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:06:26.075260", "notes": "[omnibees] via [class*='price']", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 4, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 810.55, "ai_suggestion": 932.13, "ai_suggestion_note": "Média concorrentes: R$ 810.55 · Peso período: ×1.15"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Standard\n\n1 Cama Casal\nVer comodidades e detalhes", "min_rate": 556.0, "max_rate": 4372.0, "total_min": 1668.0, "total_max": 13116.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:06:40.579074", "notes": "[guestreservations]", "room_category": "Standard", "diff_vs_ref_abs": -178.53, "diff_vs_ref_pct": -24.3, "rank_position": 1, "rank_total": 5, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -24.3% mais barato que Chez Pitu", "market_avg": 1605.69, "ai_suggestion": 1846.55, "ai_suggestion_note": "Média concorrentes: R$ 1,605.69 · Peso período: ×1.15"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 800.0, "max_rate": 3360.0, "total_min": 2400.0, "total_max": 10080.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:06:56.464084", "notes": "[omnibees] via [class*='price']", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 810.55, "ai_suggestion": 932.13, "ai_suggestion_note": "Média concorrentes: R$ 810.55 · Peso período: ×1.15"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 2655.39, "max_rate": 2655.39, "total_min": 7966.17, "total_max": 7966.17, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:07:09.552905", "notes": "[hsystem]", "room_category": "Standard", "diff_vs_ref_abs": 1920.86, "diff_vs_ref_pct": 261.5, "rank_position": 5, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 1605.69, "ai_suggestion": 1846.55, "ai_suggestion_note": "Média concorrentes: R$ 1,605.69 · Peso período: ×1.15"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 1352.85, "max_rate": 2061.9, "total_min": 2705.7, "total_max": 4123.8, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:07:19.284989", "notes": "[silbeck] via JSON-LD schema.org", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 4, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 2080.12, "ai_suggestion": 2454.54, "ai_suggestion_delta": 1101.69, "ai_suggestion_note": "Média concorrentes: R$ 2,080.12 · Peso período: ×1.18 · Ajuste sugerido: +R$ 1,101.69"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 1196.0, "max_rate": 5704.0, "total_min": 2392.0, "total_max": 11408.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:07:35.379209", "notes": "[omnibees] via [class*='price']", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 965.67, "ai_suggestion": 1139.49, "ai_suggestion_note": "Média concorrentes: R$ 965.67 · Peso período: ×1.18"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "5 hotéis disponíveis nas proximidades", "min_rate": 851.0, "max_rate": 5738.0, "total_min": 1702.0, "total_max": 11476.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:07:49.411474", "notes": "[guestreservations]", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 965.67, "ai_suggestion": 1139.49, "ai_suggestion_note": "Média concorrentes: R$ 965.67 · Peso período: ×1.18"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 850.0, "max_rate": 2380.0, "total_min": 1700.0, "total_max": 4760.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:08:05.404957", "notes": "[omnibees] via [class*='price']", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 1, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 965.67, "ai_suggestion": 1139.49, "ai_suggestion_note": "Média concorrentes: R$ 965.67 · Peso período: ×1.18"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 2080.12, "max_rate": 2080.12, "total_min": 4160.24, "total_max": 4160.24, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:08:17.702022", "notes": "[hsystem]", "room_category": "Standard", "diff_vs_ref_abs": 727.27, "diff_vs_ref_pct": 53.8, "rank_position": 5, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 2080.12, "ai_suggestion": 2454.54, "ai_suggestion_note": "Média concorrentes: R$ 2,080.12 · Peso período: ×1.18"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 879.0, "max_rate": 1212.0, "total_min": 1758.0, "total_max": 2424.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:08:31.089510", "notes": "Seletor: .bui-price-display__value | slug=chez-pitu-praia", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 4, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 26.7% acima da média dos concorrentes", "market_avg": 694.0, "ai_suggestion": 680.12, "ai_suggestion_delta": -198.88, "ai_suggestion_note": "Média concorrentes: R$ 694.00 · Peso período: ×0.98 · Ajuste sugerido: R$ -198.88"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-19T22:08:43.643108", "notes": "Preço não encontrado no Booking.com | slug=pousada-maravista | URL: https://www.booking.com/hotel/br/pousada-maravista.pt-br.html?checkin=2026-05-25&checkout=2026-05-27&group_adults=2&no_rooms=1&selected_currency=BRL", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 680.12, "ai_suggestion_note": "Média concorrentes: R$ 694.00 · Peso período: ×0.98"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 558.0, "max_rate": 1097.0, "total_min": 1116.0, "total_max": 2194.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:08:55.971354", "notes": "Seletor: .bui-price-display__value | slug=serena-buzios", "room_category": "Standard", "diff_vs_ref_abs": -321.0, "diff_vs_ref_pct": -36.5, "rank_position": 1, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -36.5% mais barato que Chez Pitu", "market_avg": 694.0, "ai_suggestion": 680.12, "ai_suggestion_note": "Média concorrentes: R$ 694.00 · Peso período: ×0.98"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto Standard com 2 Camas de Solteiro", "min_rate": 640.0, "max_rate": 968.0, "total_min": 1280.0, "total_max": 1936.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:09:08.569968", "notes": "Seletor: .bui-price-display__value | slug=pousada-dos-gravatas", "room_category": "Standard", "diff_vs_ref_abs": -239.0, "diff_vs_ref_pct": -27.2, "rank_position": 2, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -27.2% mais barato que Chez Pitu", "market_avg": 694.0, "ai_suggestion": 680.12, "ai_suggestion_note": "Média concorrentes: R$ 694.00 · Peso período: ×0.98"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "semana", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Suíte Standard", "min_rate": 884.0, "max_rate": 1341.0, "total_min": 1768.0, "total_max": 2682.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:09:20.968350", "notes": "Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "room_category": "Standard", "diff_vs_ref_abs": 5.0, "diff_vs_ref_pct": 0.6, "rank_position": 4, "rank_total": 4, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 694.0, "ai_suggestion": 680.12, "ai_suggestion_note": "Média concorrentes: R$ 694.00 · Peso período: ×0.98"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 953.0, "max_rate": 1141.5, "total_min": 1906.0, "total_max": 2283.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:09:33.228884", "notes": "Seletor: .bui-price-display__value | slug=chez-pitu-praia", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "market_avg": 947.17, "ai_suggestion": 1060.83, "ai_suggestion_delta": 107.83, "ai_suggestion_note": "Média concorrentes: R$ 947.17 · Peso período: ×1.12 · Ajuste sugerido: +R$ 107.83"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto Standard", "min_rate": 1104.0, "max_rate": 2288.5, "total_min": 2208.0, "total_max": 4577.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:09:45.624643", "notes": "Seletor: .bui-price-display__value | slug=pousada-maravista", "room_category": "Standard", "diff_vs_ref_abs": 151.0, "diff_vs_ref_pct": 15.8, "rank_position": 4, "rank_total": 4, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 947.17, "ai_suggestion": 1060.83, "ai_suggestion_note": "Média concorrentes: R$ 947.17 · Peso período: ×1.12"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Superior com Banheira de Hidromassagem", "min_rate": 737.0, "max_rate": 1114.0, "total_min": 1474.0, "total_max": 2228.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:09:58.160576", "notes": "Seletor: .bui-price-display__value | slug=serena-buzios", "room_category": "Standard", "diff_vs_ref_abs": -216.0, "diff_vs_ref_pct": -22.7, "rank_position": 1, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -22.7% mais barato que Chez Pitu", "market_avg": 947.17, "ai_suggestion": 1060.83, "ai_suggestion_note": "Média concorrentes: R$ 947.17 · Peso período: ×1.12"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-19T22:10:10.718855", "notes": "Preço não encontrado no Booking.com | slug=pousada-dos-gravatas | URL: https://www.booking.com/hotel/br/pousada-dos-gravatas.pt-br.html?checkin=2026-05-22&checkout=2026-05-24&group_adults=2&no_rooms=1&selected_currency=BRL", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1060.83, "ai_suggestion_note": "Média concorrentes: R$ 947.17 · Peso período: ×1.12"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "fds", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Suíte Standard", "min_rate": 1000.5, "max_rate": 1701.5, "total_min": 2001.0, "total_max": 3403.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:10:23.854863", "notes": "Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "room_category": "Standard", "diff_vs_ref_abs": 47.5, "diff_vs_ref_pct": 5.0, "rank_position": 3, "rank_total": 4, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 947.17, "ai_suggestion": 1060.83, "ai_suggestion_note": "Média concorrentes: R$ 947.17 · Peso período: ×1.12"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 907.67, "max_rate": 1252.0, "total_min": 2723.01, "total_max": 3756.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:10:36.310082", "notes": "Seletor: .bui-price-display__value | slug=chez-pitu-praia", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 10.1% acima da média dos concorrentes", "market_avg": 824.22, "ai_suggestion": 947.86, "ai_suggestion_delta": 40.19, "ai_suggestion_note": "Média concorrentes: R$ 824.22 · Peso período: ×1.15 · Ajuste sugerido: +R$ 40.19"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Quarto Deluxe com Vista para o Mar", "min_rate": 1953.67, "max_rate": 3044.0, "total_min": 5861.01, "total_max": 9132.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:10:48.723293", "notes": "Seletor: .bui-price-display__value | slug=pousada-maravista", "room_category": "Luxo", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 5, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 1953.67, "ai_suggestion": 2246.72, "ai_suggestion_note": "Média concorrentes: R$ 1,953.67 · Peso período: ×1.15"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 641.0, "max_rate": 1493.0, "total_min": 1923.0, "total_max": 4479.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:11:00.887122", "notes": "Seletor: .bui-price-display__value | slug=serena-buzios", "room_category": "Standard", "diff_vs_ref_abs": -266.67, "diff_vs_ref_pct": -29.4, "rank_position": 1, "rank_total": 5, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -29.4% mais barato que Chez Pitu", "market_avg": 824.22, "ai_suggestion": 947.86, "ai_suggestion_note": "Média concorrentes: R$ 824.22 · Peso período: ×1.15"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 800.0, "max_rate": 1210.0, "total_min": 2400.0, "total_max": 3630.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:11:13.276757", "notes": "Seletor: .bui-price-display__value | slug=pousada-dos-gravatas", "room_category": "Standard", "diff_vs_ref_abs": -107.67, "diff_vs_ref_pct": -11.9, "rank_position": 2, "rank_total": 5, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -11.9% mais barato que Chez Pitu", "market_avg": 824.22, "ai_suggestion": 947.86, "ai_suggestion_note": "Média concorrentes: R$ 824.22 · Peso período: ×1.15"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "ferias", "period_name": "Férias Escolares", "checkin": "2026-07-14", "checkout": "2026-07-17", "nights": 3, "adults": 2, "room_name": "Suíte Standard", "min_rate": 1031.67, "max_rate": 1827.67, "total_min": 3095.01, "total_max": 5483.01, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:11:25.762260", "notes": "Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "room_category": "Standard", "diff_vs_ref_abs": 124.0, "diff_vs_ref_pct": 13.7, "rank_position": 4, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 824.22, "ai_suggestion": 947.86, "ai_suggestion_note": "Média concorrentes: R$ 824.22 · Peso período: ×1.15"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 1350.5, "max_rate": 2123.0, "total_min": 2701.0, "total_max": 4246.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:11:38.356585", "notes": "Seletor: .bui-price-display__value | slug=chez-pitu-praia", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 2, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 4.9% acima da média dos concorrentes", "market_avg": 1288.0, "ai_suggestion": 1519.84, "ai_suggestion_delta": 169.34, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00 · Peso período: ×1.18 · Ajuste sugerido: +R$ 169.34"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-19T22:11:50.662886", "notes": "Preço não encontrado no Booking.com | slug=pousada-maravista | URL: https://www.booking.com/hotel/br/pousada-maravista.pt-br.html?checkin=2027-01-10&checkout=2027-01-12&group_adults=2&no_rooms=1&selected_currency=BRL", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 2, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1519.84, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00 · Peso período: ×1.18"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-19T22:12:02.909676", "notes": "Preço não encontrado no Booking.com | slug=serena-buzios | URL: https://www.booking.com/hotel/br/serena-buzios.pt-br.html?checkin=2027-01-10&checkout=2027-01-12&group_adults=2&no_rooms=1&selected_currency=BRL", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 2, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1519.84, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00 · Peso período: ×1.18"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-19T22:12:15.303797", "notes": "Preço não encontrado no Booking.com | slug=pousada-dos-gravatas | URL: https://www.booking.com/hotel/br/pousada-dos-gravatas.pt-br.html?checkin=2027-01-10&checkout=2027-01-12&group_adults=2&no_rooms=1&selected_currency=BRL", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 2, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1519.84, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00 · Peso período: ×1.18"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "alta_temporada", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Suíte Standard", "min_rate": 1288.0, "max_rate": 2164.0, "total_min": 2576.0, "total_max": 4328.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-19T22:12:27.691063", "notes": "Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "room_category": "Standard", "diff_vs_ref_abs": -62.5, "diff_vs_ref_pct": -4.6, "rank_position": 1, "rank_total": 2, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -4.6% mais barato que Chez Pitu", "market_avg": 1288.0, "ai_suggestion": 1519.84, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00 · Peso período: ×1.18"}]</script>
+<script id="data-raw" type="application/json">[{"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 739.2, "max_rate": 739.2, "total_min": 1478.4, "total_max": 1478.4, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:28:55.403174", "notes": "[REAL][silbeck] JSON-LD schema.org | total_stay | descartados=19 | conversao: R$1,478.40/2noites → R$739.20/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "total_site=1478.4", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 743.71, "ai_suggestion": 743.71, "ai_suggestion_delta": 4.51, "ai_suggestion_note": "Média concorrentes: R$ 743.71 · Ajuste sugerido: +R$ 4.51"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 352.75, "max_rate": 352.75, "total_min": 705.5, "total_max": 705.5, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:29:12.420163", "notes": "[REAL][omnibees] zc-date-price JS | total_stay | conversao: R$705.50/2noites → R$352.75/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=705.5", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 482.92, "ai_suggestion": 482.92, "ai_suggestion_note": "Média concorrentes: R$ 482.92"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Serena Buzios", "min_rate": 744.0, "max_rate": 744.0, "total_min": 1488.0, "total_max": 1488.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:29:33.105720", "notes": "[REAL][athotels] CSS/regex | total_stay | conversao: R$1,488.00/2noites → R$744.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1488.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 5, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 482.92, "ai_suggestion": 482.92, "ai_suggestion_note": "Média concorrentes: R$ 482.92"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 352.0, "max_rate": 352.0, "total_min": 704.0, "total_max": 704.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:29:52.100651", "notes": "[REAL][omnibees] [class*='price'] | total_stay | conversao: R$704.00/2noites → R$352.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=704.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 1, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 482.92, "ai_suggestion": 482.92, "ai_suggestion_note": "Média concorrentes: R$ 482.92"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 743.71, "max_rate": 743.71, "total_min": 1487.41, "total_max": 1487.41, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:30:04.753892", "notes": "[REAL][hsystem] CSS/regex | total_stay | conversao: R$1,487.41/2noites → R$743.71/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1487.41", "room_category": "Standard", "diff_vs_ref_abs": 4.51, "diff_vs_ref_pct": 0.6, "rank_position": 4, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 743.71, "ai_suggestion": 743.71, "ai_suggestion_note": "Média concorrentes: R$ 743.71"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 852.0, "max_rate": 852.0, "total_min": 1704.0, "total_max": 1704.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:30:14.465749", "notes": "[REAL][silbeck] JSON-LD schema.org | total_stay | descartados=17 | conversao: R$1,704.00/2noites → R$852.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "total_site=1704.0", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 912.0, "ai_suggestion": 912.0, "ai_suggestion_delta": 60.0, "ai_suggestion_note": "Média concorrentes: R$ 912.00 · Ajuste sugerido: +R$ 60.00"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 415.0, "max_rate": 415.0, "total_min": 830.0, "total_max": 830.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:30:30.669137", "notes": "[REAL][omnibees] [class*='price'] | total_stay | conversao: R$830.00/2noites → R$415.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=830.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 583.33, "ai_suggestion": 583.33, "ai_suggestion_note": "Média concorrentes: R$ 583.33"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Serena Buzios", "min_rate": 983.0, "max_rate": 983.0, "total_min": 1966.0, "total_max": 1966.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:30:51.063639", "notes": "[REAL][athotels] CSS/regex | total_stay | conversao: R$1,966.00/2noites → R$983.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1966.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 5, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 583.33, "ai_suggestion": 583.33, "ai_suggestion_note": "Média concorrentes: R$ 583.33"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 352.0, "max_rate": 352.0, "total_min": 704.0, "total_max": 704.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:31:06.546466", "notes": "[REAL][omnibees] zc-date-price JS | total_stay | conversao: R$704.00/2noites → R$352.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=704.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 1, "rank_total": 5, "alert_level": "neutral", "alert_message": "", "market_avg": 583.33, "ai_suggestion": 583.33, "ai_suggestion_note": "Média concorrentes: R$ 583.33"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 912.0, "max_rate": 912.0, "total_min": 1824.0, "total_max": 1824.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:31:18.856254", "notes": "[REAL][hsystem] CSS/regex | total_stay | conversao: R$1,824.00/2noites → R$912.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1824.0", "room_category": "Standard", "diff_vs_ref_abs": 60.0, "diff_vs_ref_pct": 7.0, "rank_position": 4, "rank_total": 5, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 912.0, "ai_suggestion": 912.0, "ai_suggestion_note": "Média concorrentes: R$ 912.00"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "STANDARD sem vista mar - térreo - 1º andar", "min_rate": 1352.85, "max_rate": 1352.85, "total_min": 2705.7, "total_max": 2705.7, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:31:28.665914", "notes": "[REAL][silbeck] JSON-LD schema.org | total_stay | descartados=19 | conversao: R$2,705.70/2noites → R$1,352.85/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "total_site=2705.7", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 4, "rank_total": 4, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 30.1% acima da média dos concorrentes", "market_avg": 1040.06, "ai_suggestion": 1040.06, "ai_suggestion_delta": -312.79, "ai_suggestion_note": "Média concorrentes: R$ 1,040.06 · Ajuste sugerido: R$ -312.79"}, {"hotel": "Maravista", "channel": "Site Direto", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 598.0, "max_rate": 598.0, "total_min": 1196.0, "total_max": 1196.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:31:44.874600", "notes": "[REAL][omnibees] [class*='price'] | total_stay | conversao: R$1,196.00/2noites → R$598.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1196.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "market_avg": 511.5, "ai_suggestion": 511.5, "ai_suggestion_note": "Média concorrentes: R$ 511.50"}, {"hotel": "Serena", "channel": "Site Direto", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-20T12:32:05.148309", "notes": "Sem tarifa, inserir tarifa manualmente — [athotels] Sem tarifa no motor", "data_origin": "sem_tarifa", "stale_rate": false, "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 511.5, "ai_suggestion_note": "Média concorrentes: R$ 511.50"}, {"hotel": "Gravatás", "channel": "Site Direto", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Quarto disponivel", "min_rate": 425.0, "max_rate": 425.0, "total_min": 850.0, "total_max": 850.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:32:23.093174", "notes": "[REAL][omnibees] [class*='price'] | total_stay | conversao: R$850.00/2noites → R$425.00/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=850.0", "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 1, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "market_avg": 511.5, "ai_suggestion": 511.5, "ai_suggestion_note": "Média concorrentes: R$ 511.50"}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "SUÍTE STANDARD Ver detalhes", "min_rate": 1040.06, "max_rate": 1040.06, "total_min": 2080.12, "total_max": 2080.12, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:32:35.750309", "notes": "[REAL][hsystem] CSS/regex | total_stay | conversao: R$2,080.12/2noites → R$1,040.06/noite", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=2080.12", "room_category": "Standard", "diff_vs_ref_abs": -312.79, "diff_vs_ref_pct": -23.1, "rank_position": 3, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -23.1% mais barato que Chez Pitu", "market_avg": 1040.06, "ai_suggestion": 1040.06, "ai_suggestion_note": "Média concorrentes: R$ 1,040.06"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 879.0, "max_rate": 879.0, "total_min": 1758.0, "total_max": 1758.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:32:49.039326", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=chez-pitu-praia", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1758.0", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 3, "rank_total": 4, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 26.7% acima da média dos concorrentes", "market_avg": 694.0, "ai_suggestion": 694.0, "ai_suggestion_delta": -185.0, "ai_suggestion_note": "Média concorrentes: R$ 694.00 · Ajuste sugerido: R$ -185.00"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-20T12:33:01.826171", "notes": "Sem tarifa, inserir tarifa manualmente — Preço não encontrado no Booking.com | slug=pousada-maravista", "data_origin": "sem_tarifa", "stale_rate": false, "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 694.0, "ai_suggestion_note": "Média concorrentes: R$ 694.00"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 558.0, "max_rate": 558.0, "total_min": 1116.0, "total_max": 1116.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:33:14.404728", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=serena-buzios", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1116.0", "room_category": "Standard", "diff_vs_ref_abs": -321.0, "diff_vs_ref_pct": -36.5, "rank_position": 1, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -36.5% mais barato que Chez Pitu", "market_avg": 694.0, "ai_suggestion": 694.0, "ai_suggestion_note": "Média concorrentes: R$ 694.00"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Quarto Standard com 2 Camas de Solteiro", "min_rate": 640.0, "max_rate": 640.0, "total_min": 1280.0, "total_max": 1280.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:33:27.140383", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=pousada-dos-gravatas", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1280.0", "room_category": "Standard", "diff_vs_ref_abs": -239.0, "diff_vs_ref_pct": -27.2, "rank_position": 2, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -27.2% mais barato que Chez Pitu", "market_avg": 694.0, "ai_suggestion": 694.0, "ai_suggestion_note": "Média concorrentes: R$ 694.00"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "semana_1", "period_name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27", "nights": 2, "adults": 2, "room_name": "Suíte Standard", "min_rate": 884.0, "max_rate": 884.0, "total_min": 1768.0, "total_max": 1768.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:33:39.450919", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1768.0", "room_category": "Standard", "diff_vs_ref_abs": 5.0, "diff_vs_ref_pct": 0.6, "rank_position": 4, "rank_total": 4, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 694.0, "ai_suggestion": 694.0, "ai_suggestion_note": "Média concorrentes: R$ 694.00"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 953.0, "max_rate": 953.0, "total_min": 1906.0, "total_max": 1906.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:33:52.202085", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=chez-pitu-praia", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1906.0", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 4, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 2.1% acima da média dos concorrentes", "market_avg": 933.67, "ai_suggestion": 933.67, "ai_suggestion_delta": -19.33, "ai_suggestion_note": "Média concorrentes: R$ 933.67 · Ajuste sugerido: R$ -19.33"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto Standard", "min_rate": 1104.0, "max_rate": 1104.0, "total_min": 2208.0, "total_max": 2208.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:34:04.648918", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=pousada-maravista", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=2208.0", "room_category": "Standard", "diff_vs_ref_abs": 151.0, "diff_vs_ref_pct": 15.8, "rank_position": 4, "rank_total": 4, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 933.67, "ai_suggestion": 933.67, "ai_suggestion_note": "Média concorrentes: R$ 933.67"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Superior com Banheira de Hidromassagem", "min_rate": 737.0, "max_rate": 737.0, "total_min": 1474.0, "total_max": 1474.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:34:16.955875", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=serena-buzios", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1474.0", "room_category": "Standard", "diff_vs_ref_abs": -216.0, "diff_vs_ref_pct": -22.7, "rank_position": 1, "rank_total": 4, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -22.7% mais barato que Chez Pitu", "market_avg": 933.67, "ai_suggestion": 933.67, "ai_suggestion_note": "Média concorrentes: R$ 933.67"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-20T12:34:29.481822", "notes": "Sem tarifa, inserir tarifa manualmente — Preço não encontrado no Booking.com | slug=pousada-dos-gravatas", "data_origin": "sem_tarifa", "stale_rate": false, "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 4, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 933.67, "ai_suggestion_note": "Média concorrentes: R$ 933.67"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "final_de_semana", "period_name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24", "nights": 2, "adults": 2, "room_name": "Suíte Standard", "min_rate": 960.0, "max_rate": 960.0, "total_min": 1920.0, "total_max": 1920.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:34:41.849587", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=1920.0", "room_category": "Standard", "diff_vs_ref_abs": 7.0, "diff_vs_ref_pct": 0.7, "rank_position": 3, "rank_total": 4, "alert_level": "competitor_higher", "alert_message": "Concorrente acima da referência", "market_avg": 933.67, "ai_suggestion": 933.67, "ai_suggestion_note": "Média concorrentes: R$ 933.67"}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Quarto Duplo Standard", "min_rate": 1350.5, "max_rate": 1350.5, "total_min": 2701.0, "total_max": 2701.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:34:54.345019", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=chez-pitu-praia", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=2701.0", "room_category": "Standard", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": 2, "rank_total": 2, "alert_level": "ref_above_avg", "alert_message": "Chez Pitu 4.9% acima da média dos concorrentes", "market_avg": 1288.0, "ai_suggestion": 1288.0, "ai_suggestion_delta": -62.5, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00 · Ajuste sugerido: R$ -62.50"}, {"hotel": "Maravista", "channel": "Booking.com", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-20T12:35:07.058384", "notes": "Sem tarifa, inserir tarifa manualmente — Preço não encontrado no Booking.com | slug=pousada-maravista", "data_origin": "sem_tarifa", "stale_rate": false, "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 2, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1288.0, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00"}, {"hotel": "Serena", "channel": "Booking.com", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-20T12:35:19.538608", "notes": "Sem tarifa, inserir tarifa manualmente — Preço não encontrado no Booking.com | slug=serena-buzios", "data_origin": "sem_tarifa", "stale_rate": false, "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 2, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1288.0, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00"}, {"hotel": "Gravatás", "channel": "Booking.com", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "", "min_rate": null, "max_rate": null, "total_min": null, "total_max": null, "currency": "BRL", "status": "manual_required", "scraped_at": "2026-05-20T12:35:32.179613", "notes": "Sem tarifa, inserir tarifa manualmente — Preço não encontrado no Booking.com | slug=pousada-dos-gravatas", "data_origin": "sem_tarifa", "stale_rate": false, "room_category": "Outros", "diff_vs_ref_abs": null, "diff_vs_ref_pct": null, "rank_position": null, "rank_total": 2, "alert_level": "neutral", "alert_message": "", "ai_suggestion": 1288.0, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00"}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_key": "alta_temporada_3", "period_name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12", "nights": 2, "adults": 2, "room_name": "Suíte Standard", "min_rate": 1288.0, "max_rate": 1288.0, "total_min": 2576.0, "total_max": 2576.0, "currency": "BRL", "status": "sucesso", "scraped_at": "2026-05-20T12:35:44.853614", "notes": "[REAL] total_stay | Seletor: .bui-price-display__value | slug=ferradura-resort-buzios", "data_origin": "scrape_real", "stale_rate": false, "price_type_detected": "total_stay", "raw_price_text": "valor=2576.0", "room_category": "Standard", "diff_vs_ref_abs": -62.5, "diff_vs_ref_pct": -4.6, "rank_position": 1, "rank_total": 2, "alert_level": "competitor_cheaper", "alert_message": "Concorrente -4.6% mais barato que Chez Pitu", "market_avg": 1288.0, "ai_suggestion": 1288.0, "ai_suggestion_note": "Média concorrentes: R$ 1,288.00"}]</script>
 <script id="data-colors" type="application/json">{"Chez Pitu Praia Hotel": "#4361EE", "Maravista": "#E63946", "Serena": "#2DC653", "Gravatás": "#F4A261", "Ferradura Resort": "#9B5DE5"}</script>
-<script id="data-alerts" type="application/json">{"competitor_cheaper": [{"hotel": "Serena", "channel": "Site Direto", "period_name": "Semana", "period_key": "semana", "room_category": "Standard", "min_rate": 442.0, "message": "Concorrente -40.2% mais barato que Chez Pitu", "diff_vs_ref_pct": -40.2}, {"hotel": "Serena", "channel": "Site Direto", "period_name": "Férias Escolares", "period_key": "ferias", "room_category": "Standard", "min_rate": 556.0, "message": "Concorrente -24.3% mais barato que Chez Pitu", "diff_vs_ref_pct": -24.3}, {"hotel": "Serena", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana", "room_category": "Standard", "min_rate": 558.0, "message": "Concorrente -36.5% mais barato que Chez Pitu", "diff_vs_ref_pct": -36.5}, {"hotel": "Gravatás", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana", "room_category": "Standard", "min_rate": 640.0, "message": "Concorrente -27.2% mais barato que Chez Pitu", "diff_vs_ref_pct": -27.2}, {"hotel": "Serena", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "fds", "room_category": "Standard", "min_rate": 737.0, "message": "Concorrente -22.7% mais barato que Chez Pitu", "diff_vs_ref_pct": -22.7}, {"hotel": "Serena", "channel": "Booking.com", "period_name": "Férias Escolares", "period_key": "ferias", "room_category": "Standard", "min_rate": 641.0, "message": "Concorrente -29.4% mais barato que Chez Pitu", "diff_vs_ref_pct": -29.4}, {"hotel": "Gravatás", "channel": "Booking.com", "period_name": "Férias Escolares", "period_key": "ferias", "room_category": "Standard", "min_rate": 800.0, "message": "Concorrente -11.9% mais barato que Chez Pitu", "diff_vs_ref_pct": -11.9}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Alta Temporada", "period_key": "alta_temporada", "room_category": "Standard", "min_rate": 1288.0, "message": "Concorrente -4.6% mais barato que Chez Pitu", "diff_vs_ref_pct": -4.6}], "ref_above_avg": [{"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana", "room_category": "Standard", "min_rate": 879.0, "message": "Chez Pitu 26.7% acima da média dos concorrentes", "diff_vs_ref_pct": null}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_name": "Férias Escolares", "period_key": "ferias", "room_category": "Standard", "min_rate": 907.67, "message": "Chez Pitu 10.1% acima da média dos concorrentes", "diff_vs_ref_pct": null}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_name": "Alta Temporada", "period_key": "alta_temporada", "room_category": "Standard", "min_rate": 1350.5, "message": "Chez Pitu 4.9% acima da média dos concorrentes", "diff_vs_ref_pct": null}], "ref_best_price": [], "competitor_higher": [{"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Semana", "period_key": "semana", "room_category": "Standard", "min_rate": 1487.41, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 101.2}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Final de Semana", "period_key": "fds", "room_category": "Standard", "min_rate": 1824.91, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 114.2}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Férias Escolares", "period_key": "ferias", "room_category": "Standard", "min_rate": 2655.39, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 261.5}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Alta Temporada", "period_key": "alta_temporada", "room_category": "Standard", "min_rate": 2080.12, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 53.8}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana", "room_category": "Standard", "min_rate": 884.0, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 0.6}, {"hotel": "Maravista", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "fds", "room_category": "Standard", "min_rate": 1104.0, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 15.8}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "fds", "room_category": "Standard", "min_rate": 1000.5, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 5.0}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Férias Escolares", "period_key": "ferias", "room_category": "Standard", "min_rate": 1031.67, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 13.7}], "total_critical": 11, "competitor_cheaper_count": 8, "ref_above_avg_count": 3, "ref_best_count": 0, "action_items": [{"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -40.2% mais barato que Chez Pitu", "context": "Semana · Site Direto"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -24.3% mais barato que Chez Pitu", "context": "Férias Escolares · Site Direto"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -36.5% mais barato que Chez Pitu", "context": "Semana · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Gravatás mais barato", "detail": "Concorrente -27.2% mais barato que Chez Pitu", "context": "Semana · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -22.7% mais barato que Chez Pitu", "context": "Final de Semana · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -29.4% mais barato que Chez Pitu", "context": "Férias Escolares · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Gravatás mais barato", "detail": "Concorrente -11.9% mais barato que Chez Pitu", "context": "Férias Escolares · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Ferradura Resort mais barato", "detail": "Concorrente -4.6% mais barato que Chez Pitu", "context": "Alta Temporada · Booking.com"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 26.7% acima da média dos concorrentes", "context": "Semana · Booking.com"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 10.1% acima da média dos concorrentes", "context": "Férias Escolares · Booking.com"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 4.9% acima da média dos concorrentes", "context": "Alta Temporada · Booking.com"}]}</script>
+<script id="data-alerts" type="application/json">{"competitor_cheaper": [{"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Alta Temporada", "period_key": "alta_temporada_3", "room_category": "Standard", "min_rate": 1040.06, "message": "Concorrente -23.1% mais barato que Chez Pitu", "diff_vs_ref_pct": -23.1}, {"hotel": "Serena", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana_1", "room_category": "Standard", "min_rate": 558.0, "message": "Concorrente -36.5% mais barato que Chez Pitu", "diff_vs_ref_pct": -36.5}, {"hotel": "Gravatás", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana_1", "room_category": "Standard", "min_rate": 640.0, "message": "Concorrente -27.2% mais barato que Chez Pitu", "diff_vs_ref_pct": -27.2}, {"hotel": "Serena", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "final_de_semana", "room_category": "Standard", "min_rate": 737.0, "message": "Concorrente -22.7% mais barato que Chez Pitu", "diff_vs_ref_pct": -22.7}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Alta Temporada", "period_key": "alta_temporada_3", "room_category": "Standard", "min_rate": 1288.0, "message": "Concorrente -4.6% mais barato que Chez Pitu", "diff_vs_ref_pct": -4.6}], "ref_above_avg": [{"hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "period_name": "Alta Temporada", "period_key": "alta_temporada_3", "room_category": "Standard", "min_rate": 1352.85, "message": "Chez Pitu 30.1% acima da média dos concorrentes", "diff_vs_ref_pct": null}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana_1", "room_category": "Standard", "min_rate": 879.0, "message": "Chez Pitu 26.7% acima da média dos concorrentes", "diff_vs_ref_pct": null}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "final_de_semana", "room_category": "Standard", "min_rate": 953.0, "message": "Chez Pitu 2.1% acima da média dos concorrentes", "diff_vs_ref_pct": null}, {"hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "period_name": "Alta Temporada", "period_key": "alta_temporada_3", "room_category": "Standard", "min_rate": 1350.5, "message": "Chez Pitu 4.9% acima da média dos concorrentes", "diff_vs_ref_pct": null}], "ref_best_price": [], "competitor_higher": [{"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Semana", "period_key": "semana_1", "room_category": "Standard", "min_rate": 743.71, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 0.6}, {"hotel": "Ferradura Resort", "channel": "Site Direto", "period_name": "Final de Semana", "period_key": "final_de_semana", "room_category": "Standard", "min_rate": 912.0, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 7.0}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Semana", "period_key": "semana_1", "room_category": "Standard", "min_rate": 884.0, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 0.6}, {"hotel": "Maravista", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "final_de_semana", "room_category": "Standard", "min_rate": 1104.0, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 15.8}, {"hotel": "Ferradura Resort", "channel": "Booking.com", "period_name": "Final de Semana", "period_key": "final_de_semana", "room_category": "Standard", "min_rate": 960.0, "message": "Concorrente acima da referência", "diff_vs_ref_pct": 0.7}], "total_critical": 9, "competitor_cheaper_count": 5, "ref_above_avg_count": 4, "ref_best_count": 0, "action_items": [{"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Ferradura Resort mais barato", "detail": "Concorrente -23.1% mais barato que Chez Pitu", "context": "Alta Temporada · Site Direto"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -36.5% mais barato que Chez Pitu", "context": "Semana · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Gravatás mais barato", "detail": "Concorrente -27.2% mais barato que Chez Pitu", "context": "Semana · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Serena mais barato", "detail": "Concorrente -22.7% mais barato que Chez Pitu", "context": "Final de Semana · Booking.com"}, {"severity": "high", "icon": "bi-exclamation-triangle-fill", "title": "Ferradura Resort mais barato", "detail": "Concorrente -4.6% mais barato que Chez Pitu", "context": "Alta Temporada · Booking.com"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 30.1% acima da média dos concorrentes", "context": "Alta Temporada · Site Direto"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 26.7% acima da média dos concorrentes", "context": "Semana · Booking.com"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 2.1% acima da média dos concorrentes", "context": "Final de Semana · Booking.com"}, {"severity": "medium", "icon": "bi-graph-up-arrow", "title": "Chez Pitu acima da média", "detail": "Chez Pitu 4.9% acima da média dos concorrentes", "context": "Alta Temporada · Booking.com"}]}</script>
 
 <script>
 "use strict";
@@ -758,12 +888,20 @@ const HOTEL_ORDER = [
   "Gravatás",
   "Ferradura Resort",
 ];
-const PERIOD_ORDER = [
-  "Semana",
-  "Final de Semana",
-  "Férias Escolares",
-  "Alta Temporada",
-];
+const PERIOD_ORDER = ["Semana", "Final de Semana", "Alta Temporada"];
+const SEARCH_CONFIG_DEFAULT = [{"name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27"}, {"name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24"}, {"name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12"}];
+const EXPECTED_PERIODS = [{"key": "semana_1", "name": "Semana", "checkin": "2026-05-25", "checkout": "2026-05-27"}, {"key": "final_de_semana", "name": "Final de Semana", "checkin": "2026-05-22", "checkout": "2026-05-24"}, {"key": "alta_temporada_3", "name": "Alta Temporada", "checkin": "2027-01-10", "checkout": "2027-01-12"}];
+const SEARCH_CONFIG_PATH_HINT = "C:/HOTEL-RMS/comparador-hoteis/data/search_config.json";
+const LOCAL_API_PORT = 8765;
+const LS_SEARCH_PERIODS = 'hotel_search_periods_v1';
+const STATUS_HOTELS = ["Chez Pitu Praia Hotel", "Maravista", "Serena", "Gravatás", "Ferradura Resort"];
+let INITIAL_STATUS = {};
+try { INITIAL_STATUS = {"running": false, "status": "completed", "progress": 100, "current_step": "Busca concluída", "channel": "all", "started_at": "2026-05-20T12:28:42", "finished_at": null, "elapsed_seconds": 422, "error": null, "steps": [{"id": "save", "label": "Salvando períodos...", "status": "done"}, {"id": "start", "label": "Iniciando busca completa...", "status": "done"}, {"id": "collect", "label": "Coletando tarifas...", "status": "running"}, {"id": "merge", "label": "Mesclando dados...", "status": "waiting"}, {"id": "dashboard", "label": "Gerando dashboard...", "status": "running"}, {"id": "charts", "label": "Atualizando gráficos...", "status": "waiting"}, {"id": "done", "label": "Busca concluída", "status": "waiting"}], "hotels": {"Chez Pitu Praia Hotel": {"status": "done", "message": "OK"}, "Maravista": {"status": "error", "message": "Sem tarifa, inserir manualmente"}, "Serena": {"status": "error", "message": "Sem tarifa, inserir manualmente"}, "Gravatás": {"status": "error", "message": "Sem tarifa, inserir manualmente"}, "Ferradura Resort": {"status": "done", "message": "OK"}}, "channels": {"booking": {"label": "Booking.com", "status": "done"}, "direct": {"label": "Site Direto", "status": "done"}}, "logs": [{"time": "12:28:42", "message": "Sessão de coleta iniciada", "hotel": "", "channel": "all", "level": "info"}, {"time": "12:28:42", "message": "Salvando períodos em search_config.json", "hotel": "", "channel": "", "level": "info"}, {"time": "12:28:42", "message": "Iniciando coleta Site Direto", "hotel": "", "channel": "Site Direto", "level": "info"}, {"time": "12:28:42", "message": "Coletando Chez Pitu Praia Hotel...", "hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "level": "info"}, {"time": "12:28:55", "message": "Chez Pitu Praia Hotel — OK", "hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "level": "ok"}, {"time": "12:28:55", "message": "Coletando Maravista...", "hotel": "Maravista", "channel": "Site Direto", "level": "info"}, {"time": "12:29:12", "message": "Maravista — OK", "hotel": "Maravista", "channel": "Site Direto", "level": "ok"}, {"time": "12:29:12", "message": "Coletando Serena...", "hotel": "Serena", "channel": "Site Direto", "level": "info"}, {"time": "12:29:33", "message": "Serena — OK", "hotel": "Serena", "channel": "Site Direto", "level": "ok"}, {"time": "12:29:33", "message": "Coletando Gravatás...", "hotel": "Gravatás", "channel": "Site Direto", "level": "info"}, {"time": "12:29:52", "message": "Gravatás — OK", "hotel": "Gravatás", "channel": "Site Direto", "level": "ok"}, {"time": "12:29:52", "message": "Coletando Ferradura Resort...", "hotel": "Ferradura Resort", "channel": "Site Direto", "level": "info"}, {"time": "12:30:04", "message": "Ferradura Resort — OK", "hotel": "Ferradura Resort", "channel": "Site Direto", "level": "ok"}, {"time": "12:30:04", "message": "Coletando Chez Pitu Praia Hotel...", "hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "level": "info"}, {"time": "12:30:14", "message": "Chez Pitu Praia Hotel — OK", "hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "level": "ok"}, {"time": "12:30:14", "message": "Coletando Maravista...", "hotel": "Maravista", "channel": "Site Direto", "level": "info"}, {"time": "12:30:30", "message": "Maravista — OK", "hotel": "Maravista", "channel": "Site Direto", "level": "ok"}, {"time": "12:30:30", "message": "Coletando Serena...", "hotel": "Serena", "channel": "Site Direto", "level": "info"}, {"time": "12:30:51", "message": "Serena — OK", "hotel": "Serena", "channel": "Site Direto", "level": "ok"}, {"time": "12:30:51", "message": "Coletando Gravatás...", "hotel": "Gravatás", "channel": "Site Direto", "level": "info"}, {"time": "12:31:06", "message": "Gravatás — OK", "hotel": "Gravatás", "channel": "Site Direto", "level": "ok"}, {"time": "12:31:06", "message": "Coletando Ferradura Resort...", "hotel": "Ferradura Resort", "channel": "Site Direto", "level": "info"}, {"time": "12:31:18", "message": "Ferradura Resort — OK", "hotel": "Ferradura Resort", "channel": "Site Direto", "level": "ok"}, {"time": "12:31:18", "message": "Coletando Chez Pitu Praia Hotel...", "hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "level": "info"}, {"time": "12:31:28", "message": "Chez Pitu Praia Hotel — OK", "hotel": "Chez Pitu Praia Hotel", "channel": "Site Direto", "level": "ok"}, {"time": "12:31:28", "message": "Coletando Maravista...", "hotel": "Maravista", "channel": "Site Direto", "level": "info"}, {"time": "12:31:44", "message": "Maravista — OK", "hotel": "Maravista", "channel": "Site Direto", "level": "ok"}, {"time": "12:31:44", "message": "Coletando Serena...", "hotel": "Serena", "channel": "Site Direto", "level": "info"}, {"time": "12:32:05", "message": "Serena — Sem tarifa, inserir manualmente", "hotel": "Serena", "channel": "Site Direto", "level": "error"}, {"time": "12:32:05", "message": "Coletando Gravatás...", "hotel": "Gravatás", "channel": "Site Direto", "level": "info"}, {"time": "12:32:23", "message": "Gravatás — OK", "hotel": "Gravatás", "channel": "Site Direto", "level": "ok"}, {"time": "12:32:23", "message": "Coletando Ferradura Resort...", "hotel": "Ferradura Resort", "channel": "Site Direto", "level": "info"}, {"time": "12:32:35", "message": "Ferradura Resort — OK", "hotel": "Ferradura Resort", "channel": "Site Direto", "level": "ok"}, {"time": "12:32:35", "message": "Iniciando coleta Booking.com", "hotel": "", "channel": "Booking.com", "level": "info"}, {"time": "12:32:36", "message": "Coletando Chez Pitu Praia Hotel...", "hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "level": "info"}, {"time": "12:32:49", "message": "Chez Pitu Praia Hotel — OK", "hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "level": "ok"}, {"time": "12:32:49", "message": "Coletando Maravista...", "hotel": "Maravista", "channel": "Booking.com", "level": "info"}, {"time": "12:33:01", "message": "Maravista — Sem tarifa, inserir manualmente", "hotel": "Maravista", "channel": "Booking.com", "level": "error"}, {"time": "12:33:01", "message": "Coletando Serena...", "hotel": "Serena", "channel": "Booking.com", "level": "info"}, {"time": "12:33:14", "message": "Serena — OK", "hotel": "Serena", "channel": "Booking.com", "level": "ok"}, {"time": "12:33:14", "message": "Coletando Gravatás...", "hotel": "Gravatás", "channel": "Booking.com", "level": "info"}, {"time": "12:33:27", "message": "Gravatás — OK", "hotel": "Gravatás", "channel": "Booking.com", "level": "ok"}, {"time": "12:33:27", "message": "Coletando Ferradura Resort...", "hotel": "Ferradura Resort", "channel": "Booking.com", "level": "info"}, {"time": "12:33:39", "message": "Ferradura Resort — OK", "hotel": "Ferradura Resort", "channel": "Booking.com", "level": "ok"}, {"time": "12:33:39", "message": "Coletando Chez Pitu Praia Hotel...", "hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "level": "info"}, {"time": "12:33:52", "message": "Chez Pitu Praia Hotel — OK", "hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "level": "ok"}, {"time": "12:33:52", "message": "Coletando Maravista...", "hotel": "Maravista", "channel": "Booking.com", "level": "info"}, {"time": "12:34:04", "message": "Maravista — OK", "hotel": "Maravista", "channel": "Booking.com", "level": "ok"}, {"time": "12:34:04", "message": "Coletando Serena...", "hotel": "Serena", "channel": "Booking.com", "level": "info"}, {"time": "12:34:16", "message": "Serena — OK", "hotel": "Serena", "channel": "Booking.com", "level": "ok"}, {"time": "12:34:16", "message": "Coletando Gravatás...", "hotel": "Gravatás", "channel": "Booking.com", "level": "info"}, {"time": "12:34:29", "message": "Gravatás — Sem tarifa, inserir manualmente", "hotel": "Gravatás", "channel": "Booking.com", "level": "error"}, {"time": "12:34:29", "message": "Coletando Ferradura Resort...", "hotel": "Ferradura Resort", "channel": "Booking.com", "level": "info"}, {"time": "12:34:41", "message": "Ferradura Resort — OK", "hotel": "Ferradura Resort", "channel": "Booking.com", "level": "ok"}, {"time": "12:34:41", "message": "Coletando Chez Pitu Praia Hotel...", "hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "level": "info"}, {"time": "12:34:54", "message": "Chez Pitu Praia Hotel — OK", "hotel": "Chez Pitu Praia Hotel", "channel": "Booking.com", "level": "ok"}, {"time": "12:34:54", "message": "Coletando Maravista...", "hotel": "Maravista", "channel": "Booking.com", "level": "info"}, {"time": "12:35:07", "message": "Maravista — Sem tarifa, inserir manualmente", "hotel": "Maravista", "channel": "Booking.com", "level": "error"}, {"time": "12:35:07", "message": "Coletando Serena...", "hotel": "Serena", "channel": "Booking.com", "level": "info"}, {"time": "12:35:19", "message": "Serena — Sem tarifa, inserir manualmente", "hotel": "Serena", "channel": "Booking.com", "level": "error"}, {"time": "12:35:19", "message": "Coletando Gravatás...", "hotel": "Gravatás", "channel": "Booking.com", "level": "info"}, {"time": "12:35:32", "message": "Gravatás — Sem tarifa, inserir manualmente", "hotel": "Gravatás", "channel": "Booking.com", "level": "error"}, {"time": "12:35:32", "message": "Coletando Ferradura Resort...", "hotel": "Ferradura Resort", "channel": "Booking.com", "level": "info"}, {"time": "12:35:44", "message": "Ferradura Resort — OK", "hotel": "Ferradura Resort", "channel": "Booking.com", "level": "ok"}, {"time": "12:35:45", "message": "Gerando dashboard HTML", "hotel": "", "channel": "", "level": "info"}], "summary": {"valid_rates": 0, "pending_manual": 0, "hotels_ok": 0, "total_hotels": 5}}; } catch(_) { INITIAL_STATUS = {}; }
+let _statusPollTimer = null;
+let _lastSearchChannel = null;
+let _periodsReference = '';
+let _currentOpsRaw = null;
+const LS_PERIODS_REFERENCE = 'hotel_periods_reference_v1';
 const CHANNEL_ORDER = ["Site Direto", "Booking.com"];
 const CH_SITE = "Site Direto";
 const CH_BOOK = "Booking.com";
@@ -847,7 +985,22 @@ function normalizePeriod(p) {
 }
 
 
+function normDateStr(v) {
+  if (!v) return '';
+  return String(v).trim().slice(0, 10);
+}
+
+function isRecordStale(d) {
+  if (!EXPECTED_PERIODS || !EXPECTED_PERIODS.length) return Boolean(d.stale_rate);
+  const exp = EXPECTED_PERIODS.find(p => p.key === d.period_key);
+  if (!exp) return true;
+  return normDateStr(d.checkin) !== normDateStr(exp.checkin)
+    || normDateStr(d.checkout) !== normDateStr(exp.checkout)
+    || Boolean(d.stale_rate);
+}
+
 function isMissingRate(d) {
+  if (isRecordStale(d)) return true;
   const n = toNum(d.min_rate);
   return n == null || n <= 0 || d.status === 'manual_required';
 }
@@ -926,6 +1079,18 @@ function getMergedData() {
 
   return RAW.map(r => {
     const rn = normalizeRecord(r);
+    if (isRecordStale(rn)) {
+      return {
+        ...rn,
+        min_rate: null,
+        max_rate: null,
+        total_min: null,
+        total_max: null,
+        status: 'manual_required',
+        stale_rate: true,
+        notes: 'Sem tarifa, inserir tarifa manualmente',
+      };
+    }
     const k  = manualKey(rn.hotel, rn.channel, rn.period_key);
     if (manualMap[k]) {
       const m  = manualMap[k];
@@ -1531,6 +1696,7 @@ function updateTableFromState(state) {
     const chCls  = (d.channel || '').includes('Booking') ? 'ch-booking' : 'ch-direct';
     const chIcon = (d.channel || '').includes('Booking') ? 'bi-b-circle-fill' : 'bi-globe2';
     const hasManual = manualKey(d.hotel, d.channel, d.period_key) in manualMap;
+    const stale = isRecordStale(d);
     const missing = isMissingRate(d);
     const btnCls    = hasManual ? 'btn-edit btn-edit-ok' : (missing ? 'btn-inserir-tarifa' : 'btn-edit');
     const btnLabel  = missing
@@ -1538,10 +1704,19 @@ function updateTableFromState(state) {
       : hasManual
         ? '<i class="bi bi-pencil-fill"></i> Editado'
         : '<i class="bi bi-pencil"></i> Editar';
+    const staleWarn = stale
+      ? '<span class="badge-stale-tarifa">Tarifa não atualizada para este período</span>'
+      : '';
+    const priceTip = (d.price_type_detected || d.raw_price_text)
+      ? ' title="' + [
+          d.price_type_detected ? ('Tipo: ' + (d.price_type_detected === 'total_stay' ? 'total da estadia' : 'diária/noite')) : '',
+          d.raw_price_text ? ('Origem: ' + String(d.raw_price_text).replace(/"/g, "'").slice(0, 120)) : '',
+        ].filter(Boolean).join(' · ').replace(/"/g, '&quot;') + '"'
+      : '';
     const minCell = !missing
-      ? '<span class="rate-pill">' + fmtBRL(d.min_rate) + '</span>'
+      ? '<span class="rate-pill"' + priceTip + '>' + fmtBRL(d.min_rate) + '</span>' + staleWarn
       : '<div class="rate-missing-red"><span class="badge-sem-tarifa">Sem tarifa</span>' +
-        '<span class="rate-missing-msg">Sem tarifa, inserir tarifa manualmente</span></div>';
+        '<span class="rate-missing-msg">Sem tarifa, inserir tarifa manualmente</span>' + staleWarn + '</div>';
     const statusCell = missing
       ? '<span class="badge-sem-tarifa">Sem tarifa</span>'
       : '<span class="status-tag ' + scfg.cls + '">' + scfg.label + '</span>';
@@ -1558,7 +1733,7 @@ function updateTableFromState(state) {
       `<td title="${(d.room_name||'').replace(/"/g,'&quot;')}">${(d.room_name||'—').substring(0,32)}</td>` +
       `<td>${minCell}</td>` +
       `<td>${d.max_rate  != null && d.max_rate  > 0 ? fmtBRL(d.max_rate)  : '—'}</td>` +
-      `<td>${d.total_min != null && d.total_min > 0 ? fmtBRL(d.total_min) : '—'}</td>` +
+      `<td${priceTip}>${d.total_min != null && d.total_min > 0 ? fmtBRL(d.total_min) : '—'}</td>` +
       `<td>${rankTxt}</td>` +
       `<td class="${missing ? 'diff-zero' : diffVis.cls}">${missing ? '—' : (dA != null ? (dA >= 0 ? '+' : '') + fmtBRL(dA) : '—')}</td>` +
       `<td class="${missing ? 'diff-zero' : diffVis.cls}">${missing ? '—' : diffVis.html}</td>` +
@@ -1772,7 +1947,7 @@ function applyFilters() {
     const emptyBooking =
       '<i class="bi bi-b-circle" style="font-size:20px;display:block;margin-bottom:6px"></i>' +
       'Nenhuma tarifa Booking.com coletada ainda<br>' +
-      '<span style="font-size:10px;opacity:.7">Execute: python main.py --channel booking --open-browser</span>';
+      '<span style="font-size:10px;opacity:.7">Use Buscar Booking.com ou buscar_booking.bat</span>';
     const emptyGeneric = 'Sem dados válidos para o filtro atual';
     const emptyMsg = (fcNorm === CH_BOOK) ? emptyBooking : emptyGeneric;
 
@@ -1799,12 +1974,597 @@ function resetFilters() {
   applyFilters();
 }
 
+/* ── Busca manual por período ─────────────────────────────────────────── */
+function isOnlineDashboard() {
+  const h = (location.hostname || '').toLowerCase();
+  if (location.protocol === 'file:') return false;
+  if (h === 'localhost' || h === '127.0.0.1') return false;
+  return location.protocol === 'https:' || location.protocol === 'http:';
+}
+
+function isLocalApiAvailable() {
+  return !isOnlineDashboard() && (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+}
+
+function loadSearchPeriodsFromStorage() {
+  try {
+    const raw = localStorage.getItem(LS_SEARCH_PERIODS);
+    if (raw) return JSON.parse(raw);
+  } catch (_) {}
+  return Array.isArray(SEARCH_CONFIG_DEFAULT) ? SEARCH_CONFIG_DEFAULT.slice(0, 3) : [];
+}
+
+function saveSearchPeriodsToStorage(entries) {
+  try { localStorage.setItem(LS_SEARCH_PERIODS, JSON.stringify(entries)); } catch (_) {}
+}
+
+function getPeriodsFingerprint(entries) {
+  return JSON.stringify((entries || []).map(e => ({
+    name: (e.name || '').trim(),
+    checkin: (e.checkin || '').slice(0, 10),
+    checkout: (e.checkout || '').slice(0, 10),
+  })));
+}
+
+function syncPeriodsReference() {
+  _periodsReference = getPeriodsFingerprint(readSearchPeriodsFromDom());
+  try { localStorage.setItem(LS_PERIODS_REFERENCE, _periodsReference); } catch (_) {}
+}
+
+function loadPeriodsReference() {
+  try {
+    const s = localStorage.getItem(LS_PERIODS_REFERENCE);
+    if (s) return s;
+  } catch (_) {}
+  return '';
+}
+
+function attachPeriodInputListeners() {
+  document.querySelectorAll('.search-period-row input').forEach(inp => {
+    inp.removeEventListener('input', onPeriodFieldChange);
+    inp.removeEventListener('change', onPeriodFieldChange);
+    inp.addEventListener('input', onPeriodFieldChange);
+    inp.addEventListener('change', onPeriodFieldChange);
+  });
+}
+
+function onPeriodFieldChange() {
+  const fp = getPeriodsFingerprint(readSearchPeriodsFromDom());
+  if (_periodsReference && fp !== _periodsReference) {
+    setOpsStatusPeriodsChanged();
+  }
+}
+
+function renderSearchPeriodFields() {
+  const wrap = $('search-periods');
+  if (!wrap) return;
+  const entries = loadSearchPeriodsFromStorage();
+  while (entries.length < 3) entries.push({ name: '', checkin: '', checkout: '' });
+  wrap.innerHTML = entries.slice(0, 3).map((e, i) => {
+    const n = i + 1;
+    return '<div class="search-period-row" data-idx="' + i + '">' +
+      '<div class="sp-title">Período ' + n + '</div>' +
+      '<label>Nome do período</label>' +
+      '<input type="text" class="sp-name" value="' + (e.name || '').replace(/"/g, '&quot;') + '" placeholder="Ex.: Semana" required>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">' +
+      '<div><label>Check-in</label><input type="date" class="sp-in" value="' + (e.checkin || '').slice(0, 10) + '" required></div>' +
+      '<div><label>Check-out</label><input type="date" class="sp-out" value="' + (e.checkout || '').slice(0, 10) + '" required></div>' +
+      '</div></div>';
+  }).join('');
+  attachPeriodInputListeners();
+}
+
+function readSearchPeriodsFromDom() {
+  const rows = document.querySelectorAll('.search-period-row');
+  const out = [];
+  rows.forEach((row, i) => {
+    const name = (row.querySelector('.sp-name')?.value || '').trim();
+    const checkin = row.querySelector('.sp-in')?.value || '';
+    const checkout = row.querySelector('.sp-out')?.value || '';
+    out.push({ name, checkin, checkout });
+  });
+  return out;
+}
+
+function validateSearchPeriods(entries) {
+  for (let i = 0; i < entries.length; i++) {
+    const e = entries[i];
+    if (!e.name) return 'Período ' + (i + 1) + ': informe o nome.';
+    if (!e.checkin || !e.checkout) return 'Período ' + (i + 1) + ' (' + e.name + '): check-in e check-out obrigatórios.';
+    if (e.checkout <= e.checkin) return 'Período ' + (i + 1) + ' (' + e.name + '): check-out deve ser após o check-in.';
+  }
+  return null;
+}
+
+function setSearchStatus(msg, isErr) {
+  const el = $('search-status');
+  if (!el) return;
+  el.textContent = msg || '';
+  el.style.color = isErr ? '#fca5a5' : '#7dd3fc';
+}
+
+function downloadSearchConfigJson(entries) {
+  const blob = new Blob([JSON.stringify(entries, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'search_config.json';
+  a.click();
+}
+
+function buildWaitingHotels() {
+  const h = {};
+  (STATUS_HOTELS || []).forEach(name => {
+    h[name] = { status: 'waiting', message: 'Aguardando nova busca' };
+  });
+  return h;
+}
+
+function archiveLogsFromRaw(raw) {
+  if (!raw || !raw.logs || !raw.logs.length) return [];
+  return [{ time: '--', message: '── Última busca ──', level: 'info', archive: true }]
+    .concat(raw.logs.slice(-40).map(l => Object.assign({}, l, { archive: true })));
+}
+
+function persistOpsAction(action, extra) {
+  if (!isLocalApiAvailable()) return Promise.resolve();
+  return fetch('http://127.0.0.1:' + LOCAL_API_PORT + '/api/status', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Object.assign({ action: action }, extra || {})),
+  }).catch(() => {});
+}
+
+function setOpsStatusPeriodsChanged() {
+  stopStatusPolling();
+  const prevLogs = (_currentOpsRaw && _currentOpsRaw.logs) ? _currentOpsRaw.logs : [];
+  const state = {
+    running: false,
+    status: 'pending',
+    progress: 0,
+    current_step: 'Períodos alterados — salve e execute nova busca',
+    channels: {
+      booking: { label: 'Booking.com', status: 'waiting' },
+      direct: { label: 'Site Direto', status: 'waiting' },
+    },
+    hotels: buildWaitingHotels(),
+    steps: [],
+    logs: archiveLogsFromRaw(_currentOpsRaw).concat([
+      { time: new Date().toLocaleTimeString('pt-BR', { hour12: false }), message: 'Períodos alterados — aguardando nova busca', level: 'warn' },
+    ]),
+    summary: {},
+    error: null,
+  };
+  _currentOpsRaw = state;
+  renderOpsStatus(state);
+  persistOpsAction('periods_changed', { previous_logs: prevLogs });
+}
+
+function setOpsStatusSaved() {
+  stopStatusPolling();
+  RAW = [];
+  const prevLogs = archiveLogsFromRaw(_currentOpsRaw);
+  const state = {
+    running: false,
+    status: 'saved',
+    progress: 0,
+    current_step: 'Períodos salvos — aguardando nova busca',
+    channels: {
+      booking: { label: 'Booking.com', status: 'waiting' },
+      direct: { label: 'Site Direto', status: 'waiting' },
+    },
+    hotels: buildWaitingHotels(),
+    steps: [],
+    logs: prevLogs.concat([
+      { time: new Date().toLocaleTimeString('pt-BR', { hour12: false }), message: 'Períodos salvos — aguardando nova busca', level: 'ok' },
+    ]),
+    summary: {},
+    error: null,
+  };
+  _currentOpsRaw = state;
+  syncPeriodsReference();
+  renderOpsStatus(state);
+  persistOpsAction('periods_saved', { previous_logs: prevLogs });
+  try { applyFilters(); } catch(_) {}
+}
+
+function setOpsStatusStarting(channel) {
+  stopStatusPolling();
+  const chKey = channel === 'booking' ? 'booking' : 'direct';
+  const state = {
+    running: true,
+    status: 'running',
+    progress: 5,
+    current_step: 'Iniciando busca...',
+    channel: channel,
+    channels: {
+      booking: { label: 'Booking.com', status: chKey === 'booking' ? 'running' : 'waiting' },
+      direct: { label: 'Site Direto', status: chKey === 'direct' ? 'running' : 'waiting' },
+    },
+    hotels: (function() {
+      const h = buildWaitingHotels();
+      Object.keys(h).forEach(k => { h[k] = { status: 'waiting', message: 'Aguardando' }; });
+      return h;
+    })(),
+    steps: [{ id: 'start', label: 'Iniciando busca...', status: 'running' }],
+    logs: [{ time: new Date().toLocaleTimeString('pt-BR', { hour12: false }), message: 'Iniciando busca...', level: 'info' }],
+    summary: {},
+    error: null,
+  };
+  _currentOpsRaw = state;
+  renderOpsStatus(state);
+  persistOpsAction('search_start', { channel: channel });
+}
+
+function saveSearchPeriods() {
+  const entries = readSearchPeriodsFromDom();
+  const err = validateSearchPeriods(entries);
+  if (err) { alert(err); return; }
+  saveSearchPeriodsToStorage(entries);
+  downloadSearchConfigJson(entries);
+  setOpsStatusSaved();
+  setSearchStatus('Períodos salvos — aguardando nova busca');
+  if (isLocalApiAvailable()) {
+    fetch('http://127.0.0.1:' + LOCAL_API_PORT + '/api/search-config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entries),
+    }).then(r => r.json()).then(d => {
+      if (d.ok) {
+        setSearchStatus('Períodos gravados — tarifas anteriores removidas');
+        window.location.reload();
+      }
+    }).catch(() => {});
+  } else {
+    try { applyFilters(); } catch(_) {}
+  }
+}
+
+function idleOpsStatus() {
+  return {
+    running: false,
+    status: 'idle',
+    progress: 0,
+    current_step: 'Aguardando nova busca',
+    channels: {
+      booking: { label: 'Booking.com', status: 'waiting' },
+      direct: { label: 'Site Direto', status: 'waiting' },
+    },
+    steps: [],
+    hotels: {},
+    logs: [],
+    summary: {},
+    error: null,
+  };
+}
+
+function normalizeOpsStatus(data) {
+  if (!data || typeof data !== 'object') return idleOpsStatus();
+  const d = Object.assign({}, data);
+  const progress = Number(d.progress) || 0;
+  const st = d.status || (d.running ? 'running' : 'idle');
+
+  if (st === 'pending' || st === 'saved') {
+    d.running = false;
+    d.status = st;
+    d.progress = 0;
+    return d;
+  }
+
+  if (d.error || st === 'error') {
+    d.running = false;
+    d.status = 'error';
+    d.current_step = d.current_step || ('Erro: ' + (d.error || '').slice(0, 80));
+    return d;
+  }
+
+  if (st === 'completed' || progress >= 100 || d.finished_at) {
+    d.running = false;
+    d.status = 'completed';
+    d.progress = 100;
+    d.current_step = 'Busca concluída';
+    return d;
+  }
+
+  if (st === 'idle' || (!d.running && !d.logs?.length && progress === 0)) {
+    return idleOpsStatus();
+  }
+
+  if (d.running && !isLocalApiAvailable()) {
+    d.running = false;
+    d.status = 'completed';
+    d.progress = 100;
+    d.current_step = 'Busca concluída';
+    return d;
+  }
+
+  if (d.running) {
+    d.status = 'running';
+    return d;
+  }
+
+  d.running = false;
+  d.status = progress >= 50 ? 'completed' : 'idle';
+  d.current_step = d.status === 'completed' ? 'Busca concluída' : 'Aguardando nova busca';
+  if (d.status === 'completed') d.progress = 100;
+  return d;
+}
+
+function openOpsStatusPanel() {
+  const panel = $('ops-status-panel');
+  if (panel) {
+    panel.classList.add('is-open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function statusApiUrl() {
+  if (isLocalApiAvailable()) return 'http://127.0.0.1:' + LOCAL_API_PORT + '/api/status';
+  return null;
+}
+
+function renderOpsStatus(raw) {
+  const data = normalizeOpsStatus(raw);
+  if (!data) return;
+  _currentOpsRaw = data;
+  const panel = $('ops-status-panel');
+  const showPanel = data.status !== 'idle' || (data.logs && data.logs.length);
+  if (showPanel) openOpsStatusPanel();
+  else if (panel) panel.classList.remove('is-open');
+
+  if (panel) {
+    panel.classList.toggle('is-running', !!data.running);
+    panel.classList.toggle('is-pending', data.status === 'pending' || data.status === 'saved');
+  }
+
+  const pct = Math.min(100, Math.max(0, Number(data.progress) || 0));
+  const fill = $('ops-progress-fill');
+  const pctEl = $('ops-progress-pct');
+  const stepEl = $('ops-current-step');
+  const isReset = data.status === 'idle' || data.status === 'pending' || data.status === 'saved';
+  if (fill) {
+    fill.style.width = (isReset ? 0 : pct) + '%';
+    fill.classList.toggle('is-done', data.status === 'completed');
+    fill.classList.toggle('is-error', data.status === 'error');
+    fill.classList.toggle('is-idle', data.status === 'idle');
+    fill.classList.toggle('is-pending', data.status === 'pending' || data.status === 'saved');
+  }
+  if (pctEl) pctEl.textContent = (isReset ? 0 : pct) + '%';
+  if (stepEl) {
+    if (data.status === 'completed') stepEl.textContent = 'Busca concluída';
+    else if (data.status === 'error') stepEl.textContent = data.current_step || 'Erro na busca';
+    else if (data.status === 'idle') stepEl.textContent = 'Aguardando nova busca';
+    else if (data.status === 'pending' || data.status === 'saved') stepEl.textContent = data.current_step;
+    else stepEl.textContent = data.current_step || 'Executando...';
+  }
+
+  const stepsEl = $('ops-steps');
+  if (stepsEl && Array.isArray(data.steps)) {
+    const icon = s => ({
+      waiting: '○', running: '●', done: '✓', error: '✗'
+    })[s] || '○';
+    stepsEl.innerHTML = data.steps.map(s =>
+      '<span class="ops-step st-' + (s.status || 'waiting') + '">' +
+      '<span class="ops-ico">' + icon(s.status) + '</span>' + (s.label || s.id) + '</span>'
+    ).join('');
+  }
+
+  const chMap = { booking: 'ops-badge-booking', direct: 'ops-badge-direct' };
+  const chLabels = { booking: 'Booking.com', direct: 'Site Direto' };
+  const chStatusPt = { waiting: 'Aguardando', running: 'Executando', done: 'Finalizado', error: 'Erro' };
+  if (data.channels) {
+    Object.keys(chMap).forEach(k => {
+      const el = $(chMap[k]);
+      let st = (data.channels[k] || {}).status || 'waiting';
+      if (data.status === 'completed') st = 'done';
+      if (data.status === 'idle' || data.status === 'pending' || data.status === 'saved') st = 'waiting';
+      if (el) {
+        const cls = (st === 'running' && data.status === 'running') ? 'running'
+          : st === 'done' ? 'done' : st === 'error' ? 'error' : 'waiting';
+        el.className = 'ops-ch-badge st-' + cls;
+        el.textContent = chLabels[k] + ' · ' + (chStatusPt[cls === 'done' ? 'done' : cls] || st);
+      }
+    });
+  }
+
+  const grid = $('ops-hotel-grid');
+  if (grid) {
+    const hotels = STATUS_HOTELS.length ? STATUS_HOTELS : Object.keys(data.hotels || {});
+    const stLabel = {
+      waiting: 'Aguardando nova busca', collecting: 'Coletando', done: 'Concluído',
+      error: 'Erro', no_rate: 'Sem tarifa'
+    };
+    const forceWait = data.status === 'pending' || data.status === 'saved';
+    grid.innerHTML = hotels.map(h => {
+      let info = (data.hotels || {})[h] || { status: 'waiting', message: 'Aguardando nova busca' };
+      if (forceWait) info = { status: 'waiting', message: 'Aguardando nova busca' };
+      const st = info.status || 'waiting';
+      const lbl = forceWait ? 'Aguardando nova busca' : (stLabel[st] || st);
+      return '<div class="ops-hotel-card st-' + (forceWait ? 'waiting' : st) + '">' +
+        '<div class="oh-name">' + h + '</div>' +
+        '<div class="oh-st">' + lbl +
+        (!forceWait && info.message && info.message !== lbl ? ' · ' + info.message : '') + '</div></div>';
+    }).join('');
+  }
+
+  const term = $('ops-terminal');
+  if (term && Array.isArray(data.logs)) {
+    term.innerHTML = data.logs.map(l => {
+      const msg = typeof l === 'string' ? l : ((l.time || '') + ' → ' + l.message);
+      const level = typeof l === 'object' ? l.level : 'info';
+      let cls = level === 'ok' ? 'l-ok' : level === 'error' ? 'l-err' : level === 'warn' ? 'l-warn' : '';
+      if (l.archive || (l.message && l.message.indexOf('Última busca') >= 0)) cls += ' l-archive';
+      return '<div class="ops-log-line ' + cls + '">' + msg + '</div>';
+    }).join('');
+    term.scrollTop = term.scrollHeight;
+  }
+
+  const sum = $('ops-summary');
+  if (sum) {
+    const s = data.summary || {};
+    const elapsed = data.elapsed_seconds != null ? data.elapsed_seconds + 's' : '—';
+    if (data.status === 'running') {
+      sum.innerHTML = '<span><strong>Em execução</strong> · ' + elapsed + ' decorridos</span>';
+    } else if (data.status === 'error') {
+      sum.innerHTML = '<span style="color:#fca5a5"><strong>Erro:</strong> ' + (data.error || data.current_step) + '</span>';
+    } else if (data.status === 'completed') {
+      sum.innerHTML =
+        '<span style="color:#86efac"><strong>Busca concluída com sucesso</strong></span>' +
+        '<span><strong>Tempo:</strong> ' + elapsed + '</span>' +
+        '<span><strong>Tarifas válidas:</strong> ' + (s.valid_rates ?? '—') + '</span>' +
+        '<span><strong>Pendências:</strong> ' + (s.pending_manual ?? '—') + '</span>' +
+        '<span><strong>Hotéis:</strong> ' + (s.hotels_ok ?? '—') + '/' + (s.total_hotels ?? '—') + '</span>';
+    } else if (data.status === 'pending') {
+      sum.innerHTML = '<span style="color:#fde047">Períodos alterados — salve e execute nova busca para atualizar tarifas.</span>';
+    } else if (data.status === 'saved') {
+      sum.innerHTML = '<span style="color:#7dd3fc">Períodos salvos — clique em <strong>Buscar Site Direto</strong> ou <strong>Booking.com</strong>.</span>';
+    } else {
+      sum.innerHTML = '<span>Defina os períodos e inicie uma busca local.</span>';
+    }
+  }
+
+  const retry = $('ops-retry');
+  if (retry) retry.style.display = data.error && !data.running ? 'block' : 'none';
+}
+
+function stopStatusPolling() {
+  if (_statusPollTimer) {
+    clearInterval(_statusPollTimer);
+    _statusPollTimer = null;
+  }
+}
+
+function pollOpsStatus(onDone) {
+  const url = statusApiUrl();
+  if (!url) return;
+  fetch(url).then(r => r.json()).then(data => {
+    renderOpsStatus(data);
+    if (data.status !== 'running' && typeof onDone === 'function') onDone(data);
+  }).catch(() => {});
+}
+
+function startStatusPolling(onDone) {
+  stopStatusPolling();
+  openOpsStatusPanel();
+  pollOpsStatus(onDone);
+  _statusPollTimer = setInterval(() => pollOpsStatus(onDone), 450);
+}
+
+function retryLastSearch() {
+  if (_lastSearchChannel) runChannelSearch(_lastSearchChannel);
+}
+
+function initOpsStatusPanel() {
+  const data = normalizeOpsStatus(INITIAL_STATUS);
+  _currentOpsRaw = data;
+  if (data.status !== 'idle' || (data.logs && data.logs.length)) {
+    renderOpsStatus(data);
+  }
+  if (data.status === 'running' && isLocalApiAvailable()) {
+    startStatusPolling(function(st) {
+      if (st.status !== 'running') stopStatusPolling();
+    });
+  }
+}
+
+function runChannelSearch(channel) {
+  const entries = readSearchPeriodsFromDom();
+  const err = validateSearchPeriods(entries);
+  if (err) { alert(err); return; }
+  saveSearchPeriodsToStorage(entries);
+  _lastSearchChannel = channel;
+  setOpsStatusStarting(channel);
+
+  if (isOnlineDashboard()) {
+    $('search-online-warn').style.display = 'block';
+    downloadSearchConfigJson(entries);
+    alert(
+      'Busca disponível apenas no ambiente local do hotel.\n\n' +
+      '1. Salve search_config.json em data/\n' +
+      '2. Execute: buscar_' + (channel === 'booking' ? 'booking' : 'site_direto') + '.bat'
+    );
+    return;
+  }
+
+  if (isLocalApiAvailable()) {
+    const btnD = $('btn-search-direct');
+    const btnB = $('btn-search-booking');
+    if (btnD) btnD.disabled = true;
+    if (btnB) btnB.disabled = true;
+    setSearchStatus('Coleta em andamento…');
+    fetch('http://127.0.0.1:' + LOCAL_API_PORT + '/api/search-config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entries),
+    }).then(() =>
+      fetch('http://127.0.0.1:' + LOCAL_API_PORT + '/api/run/' + channel, { method: 'POST' })
+    ).then(r => r.json()).then(d => {
+      if (!d.ok) {
+        if (btnD) btnD.disabled = false;
+        if (btnB) btnB.disabled = false;
+        setSearchStatus(d.error || 'Erro', true);
+        alert(d.error || 'Erro na coleta');
+        return;
+      }
+      startStatusPolling(function(data) {
+        stopStatusPolling();
+        if (btnD) btnD.disabled = false;
+        if (btnB) btnB.disabled = false;
+        if (data.error) {
+          setSearchStatus(data.error, true);
+        } else {
+          syncPeriodsReference();
+          setSearchStatus('Busca concluída com sucesso');
+          setTimeout(() => location.reload(), 1200);
+        }
+      });
+    }).catch(ex => {
+      stopStatusPolling();
+      if (btnD) btnD.disabled = false;
+      if (btnB) btnB.disabled = false;
+      setSearchStatus('Servidor local indisponível', true);
+      fallbackSearchInstructions(channel, entries);
+    });
+    return;
+  }
+
+  fallbackSearchInstructions(channel, entries);
+}
+
+function fallbackSearchInstructions(channel, entries) {
+  downloadSearchConfigJson(entries);
+  const bat = channel === 'booking' ? 'buscar_booking.bat' : 'buscar_site_direto.bat';
+  alert(
+    'Para executar a busca localmente:\n\n' +
+    '1. Salve search_config.json em:\n   ' + SEARCH_CONFIG_PATH_HINT + '\n' +
+    '2. Execute na pasta do projeto:\n   ' + bat + '\n\n' +
+    'Ou inicie: python local_server.py\n' +
+    'e abra http://127.0.0.1:' + LOCAL_API_PORT + '/'
+  );
+}
+
+function initSearchPanel() {
+  renderSearchPeriodFields();
+  syncPeriodsReference();
+  if (isOnlineDashboard()) {
+    const w = $('search-online-warn');
+    if (w) w.style.display = 'block';
+    const bd = $('btn-search-direct');
+    const bb = $('btn-search-booking');
+    if (bd) { bd.disabled = false; bd.title = 'Salvar períodos e usar BAT local'; }
+    if (bb) { bb.disabled = false; bb.title = 'Salvar períodos e usar BAT local'; }
+  }
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
+    initSearchPanel();
+    initOpsStatusPanel();
     applyFilters();
     try { setDashboardTab(localStorage.getItem(TAB_KEY) || 'dashboard'); } catch(_) { setDashboardTab('dashboard'); }
   });
 } else {
+  initSearchPanel();
+  initOpsStatusPanel();
   applyFilters();
   try { setDashboardTab(localStorage.getItem(TAB_KEY) || 'dashboard'); } catch(_) { setDashboardTab('dashboard'); }
 }
